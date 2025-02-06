@@ -37,14 +37,18 @@
                 <option value=0>not important</option>
             </select> <br> <br>
             <button type="button" onclick="addTask()">Submit</button>
+            <button type="button" onclick="show1()">Show important</button>
+            <button type="button" onclick="show0()">Show not important</button>
+            <button type="button" onclick="showall()">Show all</button>
         </div>
         <div id="taskContainer">    
             <script>
                 let tasks = [
                 ];
 
-                function displayTask() {
-                    tasks.forEach((task, index) => {
+                function displayTask(tasksList) {
+                    document.getElementById("taskContainer").innerHTML = "";
+                    tasksList.forEach((task, index) => {
 
                         let test = document.createElement("div");
                         test.classList.add("taskBox");
@@ -61,12 +65,22 @@
                 }
 
                 function addTask () {
-                    document.getElementById("taskContainer").innerHTML = "";
                     let taskDesc = document.getElementById("description").value;
                     let taskPrio = parseInt(document.getElementById("priority").value);
                     tasks.push({description:taskDesc, priority:taskPrio});
-                    displayTask();
+                    displayTask(tasks);
                 };
+
+                function show1 ()  {
+                    displayTask(tasks.filter(task => task.priority === 1));
+                }
+                function show0 ()  {
+                    displayTask(tasks.filter(task => task.priority === 0));
+                }
+                function showall () {
+                    displayTask(tasks);
+                }
+
             </script>
         </div>
     </div>
