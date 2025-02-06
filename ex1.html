@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 80vw;
+        }
+
+        .taskContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .taskBox {
+            width: 100px;
+            height: 50px;
+            border: 1px solid black;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <label for="">Task:</label> <br>
+            <input type="text" name="" id="description"> <br> <br>
+            <label for="">Priority:</label> <br>
+            <select name="" id="priority">
+                <option value=1>important</option>
+                <option value=0>not important</option>
+            </select> <br> <br>
+            <button type="button" onclick="addTask()">Submit</button>
+        </div>
+        <div id="taskContainer">    
+            <script>
+                let tasks = [
+                ];
+
+                function displayTask() {
+                    tasks.forEach((task, index) => {
+
+                        let test = document.createElement("div");
+                        test.classList.add("taskBox");
+                        test.textContent = task.description;
+                        if (task.priority === 0) {
+                            test.style.backgroundColor = "grey";
+                        } else {
+                            test.style.backgroundColor = "red";
+
+                        }
+                        document.getElementById("taskContainer").appendChild(test);
+
+                    });
+                }
+
+                function addTask () {
+                    document.getElementById("taskContainer").innerHTML = "";
+                    let taskDesc = document.getElementById("description").value;
+                    let taskPrio = parseInt(document.getElementById("priority").value);
+                    tasks.push({description:taskDesc, priority:taskPrio});
+                    displayTask();
+                };
+            </script>
+        </div>
+    </div>
+    
+</body>
+</html>
